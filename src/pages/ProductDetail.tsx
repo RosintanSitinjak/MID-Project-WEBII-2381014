@@ -46,8 +46,7 @@ interface Review {
 }
 
 interface DeletedProduct extends ProductDetail {
-  // eslint-disable-next-line @typescript-eslint/no-wrapper-object-types
-  isDeleted: Boolean;
+  isDeleted: boolean;
   deletedOn: string;
 }
 
@@ -152,13 +151,16 @@ const ProductDetail = () => {
   const product: ProductDetail | undefined = getProductDetail.data?.data;
   const deleteProductMutation = useMutation({
     mutationFn: () => deleteProduct(id),
+    onSuccess: () => {
+      navigate("/product", { replace: true });
+    },
   });
   const navigate = useNavigate();
   useEffect(() => {
     if (deleteProductMutation.isSuccess) {
       navigate("/product", { replace: true });
     }
-  }, [deleteProductMutation.isSuccess]);
+  }, [deleteProductMutation.isSuccess, navigate]);
   return (
     <>
       {getProductDetail.isFetching || product == undefined ? (
