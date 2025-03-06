@@ -1,7 +1,11 @@
 import axios from "axios";
 
-const AxiosInstance = axios.create({
-  baseURL: "https://dummyjson.com",
+const axiosInstance = axios.create({
+  // baseURL: "https://dummyjson.com/docs",
+  baseURL: "https://dummyjson.com/",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
-export default AxiosInstance;
+export default axiosInstance;
